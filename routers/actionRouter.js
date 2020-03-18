@@ -3,19 +3,72 @@ const Actions = require('../data/helpers/actionModel.js');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-	Actions.get()
-		.then(action => {
-			res
-				.status(200)
-				.json({
-					response: 'here are the actions you requested',
-					actionList: action,
+// get actions
+router.get('/', async (req, res) => {
+	const action = await Actions.get();
+	action
+		? res.status(200).json({
+				ACTION: 'here are the actions you requested',
+				actionList: action,
+		  })
+		: res
+				.status(400)
+				.json({ HMM: 'no actions here' })
+				.catch(() => {
+					res.status(500).json({ FAIL: 'error is error' });
 				});
-		})
-		.catch(() => {
-			res.status(500).json({ response: 'no actions here' });
-		});
 });
+
+// get action by id
+router.get('/:id', async (req, res) => {
+	const { id } = req.params;
+	const action = await Actions.get(id);
+	action
+		? res.status(200).json({
+				NEAT: `you requested action: ${id}, so here it is`,
+				result: action,
+		  })
+		: res
+				.status(400)
+				.json({ ODD: 'missing actions' })
+				.catch(() => {
+					res.status(500).json({ STRANGE: 'erroring' });
+				});
+});
+
+// post insert actions into projects ** needs updated middleware
+router.post('/', (req, res) => {
+	const { id } = req.params;
+	const body = req.body;
+	const action = Actions.insert(body, id);
+	action
+		? res
+				.status(201)
+				.json({ DING: 'new action, ready for pickup', result: body })
+		: res
+				.status(400)
+				.json({ MEH: 'this action is no good' })
+				.catch(() => {
+					res.status(500).json({ HUH: 'action explosion' });
+				});
+});
+
+// --> update actions <--
+
+// --> delete actions <--
+
+// actions middleware
+async function validateActionId(req, res, next) {
+	const { id } = req.params;
+	const action = await Actions.get(id);
+	action
+		? next()
+		: res
+				.status(400)
+				.json({ result: `Action: ${id} is not here` })
+				.catch(() => {
+					res.status(500).json({ error: 'action errors' });
+				});
+}
 
 module.exports = router;
