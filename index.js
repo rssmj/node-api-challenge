@@ -1,3 +1,9 @@
+const server = require('./server.js');
+const PORT = 8888;
+server.listen(PORT, () => {
+	console.log(`\n [-_-] ${PORT} [-_-] \n`);
+});
+
 /*
 play this: https://www.youtube.com/watch?v=d-diB65scQU
 
