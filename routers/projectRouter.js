@@ -1,6 +1,6 @@
 const express = require('express');
 const Projects = require('../data/helpers/projectModel.js');
-// const Actions = require('../helpers/actionModel.js');
+const Actions = require('../data/helpers/actionModel.js');
 
 const router = express.Router();
 
@@ -38,6 +38,22 @@ router.get('/:id', validateProjectId, async (req, res) => {
 });
 
 // --> get actions for projects <--
+router.get('/:id/actions', validateProjectId, async (req, res) => {
+	const { id } = req.params;
+	const project = await Projects.get(id);
+	const action = await Projects.getProjectActions(id);
+	project
+		? res.status(200).json({
+				COOL: `special delivery, actions for project ID: ${id}, just for you`,
+				result: action,
+		  })
+		: res
+				.status(400)
+				.json({ NOT_COOL: `project ID: ${id}, actions not here` })
+				.catch(() => {
+					res.status(500).json({ WORSE: 'nothing here' });
+				});
+});
 
 // post insert project
 router.post('/', validateProjectId, async (req, res) => {
@@ -101,17 +117,17 @@ async function validateProjectId(req, res, next) {
 				});
 }
 
-// async function getProjectActions(req, res, next) {
-// 	const { id } = req.params;
-// 	const project = await Actions.get(id);
-// 	actions
-// 		? next()
-// 		: res
-// 				.status(400)
-// 				.json({ result: `Actions: ${id} is not here` })
-// 				.catch(() => {
-// 					res.status(500).json({ error: 'action errors' });
-// 				});
-// }
+async function getProjectActions(req, res, next) {
+	const { id } = req.params;
+	const actions = await Actions.getProjectActions(id);
+	actions
+		? next()
+		: res
+				.status(400)
+				.json({ result: `Actions: ${id} is not here` })
+				.catch(() => {
+					res.status(500).json({ error: 'action errors' });
+				});
+}
 
 module.exports = router;
