@@ -36,11 +36,11 @@ router.get('/:id', async (req, res) => {
 				});
 });
 
-// post insert actions into projects ** needs updated middleware
-router.post('/', (req, res) => {
+// post insert actions into projects
+router.post('/', validateActionId, async (req, res) => {
 	const { id } = req.params;
 	const body = req.body;
-	const action = Actions.insert(body, id);
+	const action = await Actions.insert(body, id);
 	action
 		? res
 				.status(201)
@@ -54,8 +54,35 @@ router.post('/', (req, res) => {
 });
 
 // --> update actions <--
+router.put('/:id', validateActionId, async (req, res) => {
+	const { id } = req.params;
+	const body = req.body;
+	const action = await Actions.update(id, body);
+	action
+		? res
+				.status(201)
+				.json({ IS_GOOD: `action id: ${id} - update updated`, result: body })
+		: res
+				.status(400)
+				.json({ NO_GOOD: `action: ${id} update did not update` })
+				.catch(() => {
+					res.status(500).json({ NOTHING: 'broken' });
+				});
+});
 
 // --> delete actions <--
+router.delete('/:id', validateActionId, async (req, res) => {
+	const { id } = req.params;
+	const action = await Actions.remove(id);
+	action
+		? res.status(201).json({ POOF: `action id: ${id} - gone` })
+		: res
+				.status(400)
+				.json({ WHY: 'no deleting this action' })
+				.catch(() => {
+					res.status(500).json({ NOTHING: 'broken' });
+				});
+});
 
 // actions middleware
 async function validateActionId(req, res, next) {

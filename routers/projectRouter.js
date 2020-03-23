@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
 });
 
 // get project by id
-router.get('/:id', async (req, res) => {
+router.get('/:id', validateProjectId, async (req, res) => {
 	const { id } = req.params;
 	const project = await Projects.get(id);
 	project
@@ -40,10 +40,10 @@ router.get('/:id', async (req, res) => {
 // --> get actions for projects <--
 
 // post insert project
-router.post('/', (req, res) => {
+router.post('/', validateProjectId, async (req, res) => {
 	const { id } = req.params;
 	const body = req.body;
-	const project = Projects.insert(body, id);
+	const project = await Projects.insert(body, id);
 	project
 		? res
 				.status(201)
@@ -57,8 +57,35 @@ router.post('/', (req, res) => {
 });
 
 // --> update projects <--
+router.put('/:id', validateProjectId, async (req, res) => {
+	const { id } = req.params;
+	const body = req.body;
+	const project = await Projects.update(id, body);
+	project
+		? res
+				.status(201)
+				.json({ IS_GOOD: `project: ${id} update updated`, result: body })
+		: res
+				.status(400)
+				.json({ NO_GOOD: 'project update did not update' })
+				.catch(() => {
+					res.status(500).json({ NOTHING: 'broken' });
+				});
+});
 
 // --> delete projects <--
+router.delete('/:id', validateProjectId, async (req, res) => {
+	const { id } = req.params;
+	const project = await Projects.remove(id);
+	project
+		? res.status(201).json({ POOF: `project id: ${id} - gone` })
+		: res
+				.status(400)
+				.json({ WHY: 'no deleting this project' })
+				.catch(() => {
+					res.status(500).json({ NOTHING: 'broken' });
+				});
+});
 
 // projects middleware
 async function validateProjectId(req, res, next) {
@@ -73,5 +100,18 @@ async function validateProjectId(req, res, next) {
 					res.status(500).json({ error: 'project errors' });
 				});
 }
+
+// async function getProjectActions(req, res, next) {
+// 	const { id } = req.params;
+// 	const project = await Actions.get(id);
+// 	actions
+// 		? next()
+// 		: res
+// 				.status(400)
+// 				.json({ result: `Actions: ${id} is not here` })
+// 				.catch(() => {
+// 					res.status(500).json({ error: 'action errors' });
+// 				});
+// }
 
 module.exports = router;
