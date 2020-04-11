@@ -1,10 +1,39 @@
-.App {
-	margin: 0;
-	text-align: center;
+@import url('https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap');
 
-	body {
-		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-			'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-			'Helvetica Neue', sans-serif;
+.App {
+	height: 100%;
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+	color: transparentize($color: #f7f7f7, $amount: 0);
+	font-size: 1.5rem;
+	font-weight: 100;
+}
+
+* {
+	font-family: 'Bebas Neue', sans-serif;
+	box-sizing: border-box;
+	letter-spacing: 0.2rem;
+	outline: none;
+	text-decoration: none;
+	list-style: none;
+}
+
+body {
+	margin: 5rem;
+	background-color: transparentize($color: #010915, $amount: 0);
+	border-radius: 0.25rem;
+	overflow: auto;
+	transition: 0.8s ease-out;
+
+	&:hover {
+		box-shadow: 0.15rem 0.5rem 8rem rgba(255, 0, 0, 0.88),
+			0 0 0 0.99rem rgba(24, 6, 33, 0.55),
+			0 0 0rem 0.55rem rgba(255, 255, 255, 0.4),
+			0 0 0 0.77rem rgba(255, 255, 255, 0.5),
+			0 0 0 1.5rem rgba(249, 38, 12, 0.66), 0 0 0 0.88rem rgba(249, 9, 2, 0.6),
+			0 0 0 0.66rem rgba(255, 255, 255, 0.44),
+			0.05rem 0.1rem 0.1rem rgba(255, 255, 255, 0.66),
+			0 0.5rem 1.5rem rgba(0, 0, 0, 0.88);
 	}
 }

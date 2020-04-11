@@ -1,0 +1,185 @@
+.container {
+	margin: 5rem;
+	padding: 5rem;
+	transition: 0.4s ease-out;
+
+	.projects-header {
+		font-size: 8rem;
+		text-shadow: 0.05rem 0.5rem 0.25rem rgba(255, 255, 255, 0.66),
+			0 0.5rem 1.5rem rgba(249, 38, 12, 0.66);
+		transition: 0.8s ease-out;
+
+		&:hover {
+			text-shadow: 0 3rem 0.25rem rgba(0, 0, 0, 0.9);
+		}
+	}
+
+	.form-container {
+		margin: 10rem;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		transition: 0.8s ease-out;
+
+		form {
+			display: flex;
+			flex-direction: column;
+			padding: 5rem;
+			margin: 2rem 5rem;
+			border-radius: 0.25rem;
+			box-shadow: 0 0 1.5rem 1.5rem rgba(24, 6, 33, 0.77),
+				0 0 0.25rem rgba(255, 255, 255, 0.77);
+			transition: 0.8s ease-out;
+
+			&:hover {
+				color: transparentize($color: #ff0000, $amount: 0.2);
+				background-color: transparentize($color: #19202a, $amount: 0.66);
+				box-shadow: 0 0 0 0.99rem rgba(24, 6, 33, 0.55),
+					0 0 0rem 0.55rem rgba(255, 255, 255, 0.4),
+					0 0 0 0.77rem rgba(255, 255, 255, 0.5),
+					0 0 0 1.5rem rgba(249, 38, 12, 0.66),
+					0 0 0 0.88rem rgba(249, 9, 2, 0.6),
+					0 0 0 0.66rem rgba(255, 255, 255, 0.44);
+			}
+
+			label {
+				display: flex;
+				font-size: 3rem;
+				padding: 1rem;
+				text-shadow: 0.05rem 0.25rem 0.25rem rgba(255, 255, 255, 0.66),
+					0 0.5rem 1.5rem rgba(249, 38, 12, 0.66);
+				transition: 0.8s ease-out;
+
+				&:hover {
+					text-shadow: 0 3rem 0.25rem rgba(0, 0, 0, 0.9),
+						0.15rem 0.3rem 0.2rem rgba(0, 0, 0, 0.9);
+				}
+			}
+
+			input,
+			textarea {
+				font-size: 1.5rem;
+				color: transparentize($color: #19202a, $amount: 0.1);
+				width: 60rem;
+				margin: 1.5rem 0;
+				padding: 1rem;
+				border-radius: 0.25rem;
+				outline: hidden;
+				border: transparent;
+				box-shadow: 0.05rem 0.25rem 0.25rem rgba(255, 0, 0, 0.77);
+				transition: 0.4s ease-out;
+
+				&:focus {
+					box-shadow: 0 0 0 0.99rem rgba(24, 6, 33, 0.55),
+						0 0 0rem 0.55rem rgba(255, 255, 255, 0.4),
+						0 0 0 0.77rem rgba(255, 255, 255, 0.5),
+						0 0 0 1.5rem rgba(249, 38, 12, 0.66),
+						0 0 0 0.88rem rgba(249, 9, 2, 0.6),
+						0 0 0 0.66rem rgba(255, 255, 255, 0.44);
+				}
+			}
+
+			textarea {
+				height: 10rem;
+			}
+
+			input::placeholder,
+			textarea::placeholder {
+				padding: 0.5rem;
+				font-size: 1.5rem;
+				color: transparent;
+				text-shadow: 0.05rem 0.05rem 0.01rem rgba(249, 9, 2, 0.9);
+				opacity: 0.55;
+				transition: 0.4s ease-in-out;
+			}
+
+			input:focus::placeholder,
+			textarea:focus::placeholder {
+				color: transparent;
+				text-shadow: 0 3rem 0.25rem rgba(249, 9, 2, 0.9);
+			}
+
+			textarea:focus::placeholder {
+				text-shadow: 0 -3rem 0.25rem rgba(249, 9, 2, 0.9);
+			}
+
+			button {
+				font-size: 2.5rem;
+				height: 3.5rem;
+				width: 3.5rem;
+				margin: 2rem;
+				padding: 1.5rem;
+				border-radius: 0.25rem;
+				color: transparentize($color: #ffffff, $amount: 0.1);
+				background-color: transparentize($color: #19202a, $amount: 0);
+				text-shadow: 0.2rem 0.4rem 0.5rem rgba(0, 0, 0, 0.6);
+				box-shadow: 0.05rem 0.25rem 0.25rem rgba(0, 0, 0, 0.6),
+					0.05rem 0.2rem 0.25rem rgba(255, 255, 255, 0.6);
+				transition: 0.8s ease-out;
+
+				&:hover {
+					color: transparentize($color: #ffffff, $amount: 1);
+					margin: 3rem;
+					background-color: transparentize($color: #ffffff, $amount: 0.1);
+					box-shadow: 0 0.55rem 0.5rem rgba(0, 0, 0, 0.7),
+						0 0 0 0.55rem rgba(24, 6, 33, 0.55),
+						0 0 0rem 0.22rem rgba(255, 255, 255, 0.4),
+						0 0 0 0.22rem rgba(255, 255, 255, 0.5),
+						0 0 0 1rem rgba(249, 38, 12, 0.66),
+						0 0 0 0.44rem rgba(249, 9, 2, 0.6),
+						0 0 0 0.55rem rgba(255, 255, 255, 0.44);
+				}
+			}
+		}
+	}
+
+	.projects-container {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-evenly;
+		flex-wrap: wrap;
+		transition: 0.5s ease-out;
+
+		.project-title {
+			margin: 7rem 1rem 1rem;
+			width: 35rem;
+			font-size: 2rem;
+			color: transparentize($color: #ffffff, $amount: 0.01);
+			text-shadow: 0.15rem 0.3rem 0.2rem rgba(0, 0, 0, 0.9);
+			transition: 0.6s ease-in-out;
+
+			&:hover {
+				width: 40rem;
+				font-size: 2.5rem;
+				color: transparentize($color: #f9597a, $amount: 0.01);
+			}
+		}
+
+		.project-content {
+			margin: 1rem 0 2rem;
+			font-size: 1.5rem;
+			color: transparentize($color: #ffffff, $amount: 0.88);
+			text-shadow: 0.15rem 0.3rem 0.2rem rgba(255, 0, 0, 0.44);
+			transition: 0.3s ease-out;
+
+			&:hover {
+				color: transparentize($color: #ffffff, $amount: 0.01);
+			}
+		}
+
+		.delete {
+			padding: 0.5rem;
+			color: transparentize($color: #ff0000, $amount: 0.33);
+			border-radius: 0.25rem;
+			border: 0.1rem solid transparentize($color: #ff0000, $amount: 0.77);
+			text-shadow: 0.15rem 0.3rem 0.2rem rgba(255, 0, 0, 0.44);
+			box-shadow: 0 0.05rem 0.1rem rgba(255, 0, 0, 0.44);
+			transition: 0.3s ease-out;
+
+			&:hover {
+				text-shadow: 0.1rem 0.3rem 0.15rem rgba(255, 0, 0, 0.88);
+				box-shadow: 0.15rem 0.5rem 8rem rgba(255, 0, 0, 0.88);
+			}
+		}
+	}
+}
