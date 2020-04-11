@@ -1,6 +1,7 @@
 const express = require('express');
 const Actions = require('../data/helpers/actionModel.js');
-
+const validateAction = require('../middleware/validateAction');
+const validateActionId = require('../middleware/validateActionId');
 const router = express.Router();
 
 // get actions
@@ -20,7 +21,7 @@ router.get('/', async (req, res) => {
 });
 
 // get action by id
-router.get('/:id', async (req, res) => {
+router.get('/:id', validateActionId, async (req, res) => {
 	const { id } = req.params;
 	const action = await Actions.get(id);
 	action
@@ -36,25 +37,25 @@ router.get('/:id', async (req, res) => {
 				});
 });
 
-// post insert actions into projects
-router.post('/', validateActionId, async (req, res) => {
-	const { id } = req.params;
-	const body = req.body;
-	const action = await Actions.insert(body, id);
-	action
-		? res
-				.status(201)
-				.json({ DING: 'new action, ready for pickup', result: body })
-		: res
-				.status(400)
-				.json({ MEH: 'this action is no good' })
-				.catch(() => {
-					res.status(500).json({ HUH: 'action explosion' });
-				});
-});
+// // post insert actions into projects
+// router.post('/', validateActionId, async (req, res) => {
+// 	const { id } = req.params;
+// 	const body = req.body;
+// 	const action = await Actions.insert(body, id);
+// 	action
+// 		? res
+// 				.status(201)
+// 				.json({ DING: 'new action, ready for pickup', result: body })
+// 		: res
+// 				.status(400)
+// 				.json({ MEH: 'this action is no good' })
+// 				.catch(() => {
+// 					res.status(500).json({ HUH: 'action explosion' });
+// 				});
+// });
 
 // --> update actions <--
-router.put('/:id', validateActionId, async (req, res) => {
+router.put('/:id', validateAction, validateActionId, async (req, res) => {
 	const { id } = req.params;
 	const body = req.body;
 	const action = await Actions.update(id, body);
@@ -85,17 +86,17 @@ router.delete('/:id', validateActionId, async (req, res) => {
 });
 
 // actions middleware
-async function validateActionId(req, res, next) {
-	const { id } = req.params;
-	const action = await Actions.get(id);
-	action
-		? next()
-		: res
-				.status(400)
-				.json({ result: `Action: ${id} is not here` })
-				.catch(() => {
-					res.status(500).json({ error: 'action errors' });
-				});
-}
+// async function validateActionId(req, res, next) {
+// 	const { id } = req.params;
+// 	const action = await Actions.get(id);
+// 	action
+// 		? next()
+// 		: res
+// 				.status(400)
+// 				.json({ result: `Action: ${id} is not here` })
+// 				.catch(() => {
+// 					res.status(500).json({ error: 'action errors' });
+// 				});
+// }
 
 module.exports = router;

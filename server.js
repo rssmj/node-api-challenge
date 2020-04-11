@@ -1,10 +1,11 @@
 const express = require('express');
 const cors = require('cors');
 const server = express().use(express.json());
-
 const helmet = require('helmet');
 const actionRouter = require('./routers/actionRouter');
 const projectRouter = require('./routers/projectRouter');
+const logger = require('./middleware/logger.js');
+
 server.use(helmet());
 server.use(cors());
 server.use(logger);
@@ -20,11 +21,11 @@ server.use('/api/actions', actionRouter);
 server.use('/api/projects', projectRouter);
 
 // middleware
-function logger(req, res, next) {
-	const method = req.method;
-	const endpoint = req.originalUrl;
-	console.log(`Requested request: ${method} to ${endpoint}`);
-	next();
-}
+// function logger(req, res, next) {
+// 	const method = req.method;
+// 	const endpoint = req.originalUrl;
+// 	console.log(`Requested request: ${method} to ${endpoint}`);
+// 	next();
+// }
 
 module.exports = server;
