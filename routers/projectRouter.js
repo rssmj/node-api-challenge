@@ -10,10 +10,13 @@ const validateProjectId = require('../middleware/validateProjectId');
 router.get('/', async (req, res) => {
 	const project = await Projects.get();
 	project
-		? res.status(200).json({
-				YAHTZEE: 'here are the projects you requested',
-				projectList: project,
-		  })
+		? res.status(200).json(
+				project
+				// {
+				// 	YAHTZEE: 'here are the projects you requested',
+				// 	projectList: project,
+				// }
+		  )
 		: res
 				.status(400)
 				.json({ YIKES: 'no projects here' })

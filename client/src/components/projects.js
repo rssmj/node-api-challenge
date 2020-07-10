@@ -5,7 +5,7 @@ import '../styles/projects.scss';
 const initialProject = {
 	name: '',
 	description: '',
-	// completed: '',
+	completed: '',
 };
 
 export const Projects = () => {
@@ -65,8 +65,8 @@ export const Projects = () => {
 							return (
 								<li key={project.id}>
 									<p className='project-name'> {project.name}</p>
-									<p className='project-content'>{project.description}</p>
-									{/* <p className='project-completed'>{project.completed}</p> */}
+									<p className='project-description'>{project.description}</p>
+									<p className='project-completed'>{project.completed}</p>
 									<span
 										className='delete'
 										onClick={(e) => {

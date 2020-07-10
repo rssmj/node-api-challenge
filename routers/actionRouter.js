@@ -8,10 +8,13 @@ const router = express.Router();
 router.get('/', async (req, res) => {
 	const action = await Actions.get();
 	action
-		? res.status(200).json({
-				ACTION: 'here are the actions you requested',
-				actionList: action,
-		  })
+		? res.status(200).json(
+				action
+				// {
+				// 	ACTION: 'here are the actions you requested',
+				// 	actionList: action,
+				// }
+		  )
 		: res
 				.status(400)
 				.json({ HMM: 'no actions here' })

@@ -140,7 +140,7 @@
 		flex-wrap: wrap;
 		transition: 0.5s ease-out;
 
-		.project-title {
+		.project-name {
 			margin: 7rem 1rem 1rem;
 			width: 35rem;
 			font-size: 2rem;
@@ -155,7 +155,7 @@
 			}
 		}
 
-		.project-content {
+		.project-description {
 			margin: 1rem 0 2rem;
 			font-size: 1.5rem;
 			color: transparentize($color: #ffffff, $amount: 0.88);
