@@ -40,13 +40,23 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+<!-- Express provides extra functionality for routing, middleware support, and allows a more condensed way to manage endpoints with organized components in the application. -->
+
 - [ ] Describe Middleware?
+
+<!-- Middleware provides additional functionality through functions that handle client requests, responses, and helps add modularity to the application. -->
 
 - [ ] Describe a Resource?
 
+<!-- Resources are sets of data stored in databases and servers that interact with a client through endpoints. -->
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+<!-- An API can return specific status codes to indicate if the request was successful, failed, or displays other information on the results of the request. -->
+
 - [ ] How can we partition our application into sub-applications?
+
+<!-- Applications can be partitioned into modular components by parsing endpoints relationally to specific resources. -->
 
 ## Minimum Viable Product
 
